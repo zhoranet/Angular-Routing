@@ -19,12 +19,14 @@ export class ProductService {
     getProducts(): Observable<IProduct[]> {
         return this.http.get(this.baseUrl)
             .map(this.extractData)
-            .do(data => console.log('getProducts: ' + JSON.stringify(data)))
+            .do(data => console.log('getProducts'))
             .catch(this.handleError);
     }
 
     getProduct(id: number): Observable<IProduct> {
+        console.log('getProduct: ' + id);
         if (id === 0) {
+            console.log('getProduct: zero');
             return Observable.of(this.initializeProduct());
         };
         const url = `${this.baseUrl}/${id}`;
