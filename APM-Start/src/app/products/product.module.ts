@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ProductResolver } from './product-resolver.service';
 import { ProductEditInfoComponent } from './product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit-tags.component';
+import { ProductEditGuard } from './product-guard.service';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ProductEditTagsComponent } from './product-edit-tags.component';
         path: ':id/edit',
         component: ProductEditComponent,
         resolve: { product: ProductResolver },
+        canDeactivate: [ProductEditGuard],
         
         children: [
           {
@@ -59,7 +61,8 @@ import { ProductEditTagsComponent } from './product-edit-tags.component';
   ],
   providers: [
     ProductService,
-    ProductResolver
+    ProductResolver,
+    ProductEditGuard
   ]
 })
 export class ProductModule {}
